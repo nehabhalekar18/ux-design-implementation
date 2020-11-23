@@ -1,0 +1,38 @@
+.card {
+  border-color: #0e0646;
+  background-color: transparent;
+  color: hsl(248, 84%, 15%);
+  font-weight: 500;
+  padding: 15% 5%;
+}
+.loginBtn {
+  border-color: #0e0646;
+  background-color: transparent;
+  color: #0e0646;
+  font-weight: 500;
+}
+.card:hover,
+.btn:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active {
+  color: #ffffff;
+  background-color: #0e0646;
+  border-color: #0e0646;
+  cursor: pointer;
+}
+.btn-primary:not(:disabled):not(.disabled):active:focus,.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(14, 6, 70, 0.5);
+}
+.container > .row > .col-4 {
+  padding-bottom: 2%;
+}
+.btn {
+  border-color: #0e0646;
+  background-color: transparent;
+  color: #0e0646;
+  font-weight: 500;
+}
+a:hover{
+  text-decoration: none;
+}
