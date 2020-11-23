@@ -1,4 +1,4 @@
-export function replaceDigits(inputData){
+let inputData="34561113256";
 let input=inputData.split('');
 let i=0;
 let temp=[];
@@ -10,5 +10,4 @@ while(input.length>i){
     }
     i++;
 }
-return(temp.join(''))
-}
+console.log(temp.join(''))
