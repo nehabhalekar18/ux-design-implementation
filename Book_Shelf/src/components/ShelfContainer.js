@@ -44,7 +44,6 @@ class ShelfContainer extends React.Component {
   };
 
   deleteBookProps = (id) => {
-    console.log("BOOK ID:: ", id);
     let bookArray = this.props.books;
     bookArray = bookArray.filter(function (obj) {
       return obj.id !== id;
