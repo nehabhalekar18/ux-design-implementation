@@ -1,31 +1,28 @@
-import React from 'react';
-import Header from './Header';
-import {v4 as uuidv4} from 'uuid';
-import Input from './Input';
-import Books from './Books';
-import "../style.css"
-class ShelfContainer extends React.Component {
-  state = {
-    books: [
-      {
-        id: uuidv4(),
-        title: 'Story Book 1',
-        isRead: true,
-      },
-      {
-        id: uuidv4(),
-        title: 'Story Book 2',
-        isRead: false,
-      },
-      {
-        id: uuidv4(),
-        title: 'Story Book 3',
-        isRead: false,
-      },
-    ],
-    book:null
-  };
+import React from "react";
+import Header from "./Header";
+import { v4 as uuidv4 } from "uuid";
+import Input from "./Input";
+import Books from "./Books";
+import "../style.css";
+import axios from "axios";
+import { connect } from "react-redux";
+import { setBooks } from "../actions/index";
 
+const mapStateToProps = (state) => ({
+  ...state,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setBooks: (books) => dispatch(setBooks(books)),
+});
+class ShelfContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+      book: null,
+    };
+  }
   handleChange = (id) => {
     this.setState({
       books: this.state.books.map((book) => {
@@ -37,41 +34,47 @@ class ShelfContainer extends React.Component {
     });
   };
 
-  // TO DO : Create teh Delete function and pass it over to the childe comp
-// console.log(I am getting dleted)
-addBook = (book) => {
-  let bookArray=this.state.books
-  let data={id:uuidv4(),title: book,
-  isRead: true}
-  bookArray.push(data)
-  this.setState({books:bookArray})
-}
+  addBook = (book) => {
+    let bookArray = this.state.books;
+    let data = { id: uuidv4(), title: book, isRead: true };
+    bookArray.push(data);
+    this.setState({ books: bookArray });
+  };
 
-deleteBookProps=(id)=>{
-let bookArray=this.state.books
-bookArray = bookArray.filter(function( obj ) {
-  return obj.id !== id;
-});
-this.setState({books:bookArray})
-}
-componentDidMount() {
-  const apiUrl = 'https://my-json-server.typicode.com/raliasadil/library/books';
-  fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => console.log('This is your data', data));
-}
+  deleteBookProps = (id) => {
+    let bookArray = this.state.books;
+    bookArray = bookArray.filter(function (obj) {
+      return obj.id !== id;
+    });
+    this.setState({ books: bookArray });
+  };
+  setBooks = () => {
+    this.props.setBooks(this.state.books);
+  };
+  async componentDidMount() {
+    var res = await axios
+      .get("https://my-json-server.typicode.com/raliasadil/library/books")
+      .then((response) => {
+        return response;
+      });
+    this.setState({ books: res.data }, this.setBooks);
+  }
   render() {
     return (
-      <React.Fragment >
-      <Header/>
-      <div style={{'padding':'2%'}}>
-        <Input addBookProps={this.addBook}/>
-        <Books books={this.state.books}
-         handleChangeProps={this.handleChange} deleteBookProps={this.deleteBookProps}></Books>
-         </div>
+      <React.Fragment>
+        <Header />
+        {/* <pre>{JSON.stringify(this.props)}</pre> */}
+        <div style={{ padding: "2%" }}>
+          <Input addBookProps={this.addBook} />
+          <Books
+            books={this.state.books}
+            handleChangeProps={this.handleChange}
+            deleteBookProps={this.deleteBookProps}
+          ></Books>
+        </div>
       </React.Fragment>
     );
   }
 }
 
-export default ShelfContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(ShelfContainer);

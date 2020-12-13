@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import ShelfContainer from "./components/ShelfContainer";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-
+import configureStore from "./store";
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={configureStore()}>
     <ShelfContainer />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById("root")
 );
 

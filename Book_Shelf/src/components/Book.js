@@ -1,8 +1,6 @@
 import React from "react";
 class Book extends React.Component {
   render() {
-    //  console.log('Props Book:', this.props)
-
     const { isRead, id, title } = this.props.book;
     return (
       <li className="book-item" style={{ "list-style-type": "none" }}>

@@ -36,7 +36,6 @@ class Input extends React.Component {
             borderRadius: "5px",
           }}
         />
-        <br /><br/>
         <input
           type="submit"
           className="input-add"
@@ -46,7 +45,7 @@ class Input extends React.Component {
             height: "24px",
             border: "1px solid rgba(0,0,0,0.7)",
             borderRadius: "5px",
-            marginLeft:"6%"
+            marginLeft:"2%"
           }}
         />
       </form>
