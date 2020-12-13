@@ -13,9 +13,9 @@ class Input extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.addBookProps(this.state.title);
-    this.setState({
+    /* this.setState({
       title: "",
-    });
+    }); */
   };
   render() {
     return (

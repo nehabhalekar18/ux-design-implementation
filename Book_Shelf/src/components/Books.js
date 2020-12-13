@@ -16,11 +16,14 @@ class Books extends React.Component {
   constructor(props) {
     super(props);
     this.markRead = this.markRead.bind(this);
+    this.removeBook=this.removeBook.bind(this);
   }
-
   markRead=(id)=> {
   this.props.markBook(id);
   }
+  removeBook=(id=>{
+    this.props.deleteBookProps(id)
+  })
   render() {
     return (
       <div>
@@ -30,6 +33,7 @@ class Books extends React.Component {
             <thead>
               <th>Book ID</th>
               <th>Book Name</th>
+              <th></th>
               <th></th>
             </thead>
             <tbody>
@@ -42,6 +46,9 @@ class Books extends React.Component {
                      Marked Read : {el.isRead.toString()}
                     </button>
                   </td>
+                  <td><button type="submit" onClick={() => this.removeBook(el.id)}>
+                     Remove
+                    </button></td>
                 </tr>
               ))}
             </tbody>

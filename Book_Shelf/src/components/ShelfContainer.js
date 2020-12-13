@@ -10,6 +10,7 @@ import { setBooks } from "../actions/index";
 
 const mapStateToProps = (state) => ({
   ...state,
+  books: state.reducers.books,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -35,19 +36,23 @@ class ShelfContainer extends React.Component {
   };
 
   addBook = (book) => {
-    let bookArray = this.state.books;
+    let bookArray = this.props.books;
     let data = { id: uuidv4(), title: book, isRead: true };
     bookArray.push(data);
+    this.props.setBooks(bookArray);
     this.setState({ books: bookArray });
   };
 
   deleteBookProps = (id) => {
-    let bookArray = this.state.books;
+    console.log("BOOK ID:: ", id);
+    let bookArray = this.props.books;
     bookArray = bookArray.filter(function (obj) {
       return obj.id !== id;
     });
+    this.props.setBooks(bookArray);
     this.setState({ books: bookArray });
   };
+
   setBooks = () => {
     this.props.setBooks(this.state.books);
   };
