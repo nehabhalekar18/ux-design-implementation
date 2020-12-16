@@ -4,9 +4,9 @@ export const setBooks = (books) => (dispatch) => {
     payload: books,
   });
 };
-export const markBook=(id)=>(dispatch)=>{
+export const markBook=(id,readVal)=>(dispatch)=>{
     dispatch({
         type: "MARK_BOOK",
-        payload: id,
+        payload: {id,readVal},
       });
 }
